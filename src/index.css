@@ -5,5 +5,9 @@
 html, body, #root {
   height: 100%;
 }
+.parallax-layer {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
 
 

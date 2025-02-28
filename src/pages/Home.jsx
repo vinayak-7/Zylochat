@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useLayoutEffect } from "react";
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import AnimatedWords from "../components/AnimatedWords";
@@ -13,8 +13,18 @@ const url = (name, wrap = false) =>
   }`;
 
 export default function Home() {
-  const parallax = useRef();
-  const [openIndex, setOpenIndex] = useState();
+  const parallax = useRef(null);
+  useLayoutEffect(() => {
+    if (parallax.current) {
+      console.log("Updating Parallax Layout...");
+      parallax.current.update();
+    }
+  }, []);
+  
+  
+  
+  
+  const [openIndex, setOpenIndex] = useState(null);
 
   const influencers = [
     {
@@ -65,7 +75,7 @@ export default function Home() {
 
   return (
     <div style={{ width: "100%", height: "100%", background: "#253237" }}>
-      <Parallax ref={parallax} pages={4}>
+      <Parallax ref={parallax} pages={4} style={{ minHeight: "100vh" }}>
         {/* Background Colors */}
         <ParallaxLayer
           offset={0}
